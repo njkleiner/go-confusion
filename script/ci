@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+go clean -testcache ./...
+
+script/lint
+script/test
+script/coverage
