@@ -1,10 +1,10 @@
-# confusion
+# go-confusion
 
 Simple configuration management for Go projects. Inspired by [cristalhq/aconfig](https://github.com/cristalhq/aconfig).
 
 ## Install
 
-`$ go get github.com/njkleiner/confusion`
+`$ go get github.com/njkleiner/go-confusion`
 
 ## Usage
 
@@ -14,8 +14,8 @@ package example
 import (
     "fmt"
 
-    "github.com/njkleiner/confusion"
-    "github.com/njkleiner/confusion/toml"
+    "github.com/njkleiner/go-confusion"
+    "github.com/njkleiner/go-confusion/toml"
 )
 
 type ExampleConfig struct {
@@ -58,7 +58,7 @@ You can contribute to this project by [sending patches](https://git-send-email.i
 
 * [Noah Kleiner](https://github.com/njkleiner)
 
-See also the list of [contributors](https://github.com/njkleiner/confusion/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/njkleiner/go-confusion/contributors) who participated in this project.
 
 ## License
 

@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/njkleiner/confusion/json"
-	"github.com/njkleiner/confusion/toml"
+	"github.com/njkleiner/go-confusion/json"
+	"github.com/njkleiner/go-confusion/toml"
 	"github.com/spf13/afero"
 )
 

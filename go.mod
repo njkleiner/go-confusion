@@ -1,4 +1,4 @@
-module github.com/njkleiner/confusion
+module github.com/njkleiner/go-confusion
 
 go 1.13
 

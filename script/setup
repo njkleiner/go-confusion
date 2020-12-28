@@ -7,4 +7,4 @@ cd "$(dirname "$0")/.."
 script/bootstrap
 
 git config --local sendemail.to "noah@njkleiner.com"
-git config --local format.subjectPrefix "PATCH confusion"
+git config --local format.subjectPrefix "PATCH go-confusion"
