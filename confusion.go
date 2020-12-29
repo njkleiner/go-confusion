@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/njkleiner/go-expandstrict"
 	"github.com/spf13/afero"
 )
 
@@ -51,7 +52,13 @@ func LoadConfig(name string, opts Options, config interface{}) error {
 	}
 
 	for _, path := range append(opts.UserPaths, opts.SystemPaths...) {
-		path = filepath.Join(os.ExpandEnv(path), opts.Prefix, name)
+		exp, err := expandstrict.Expand(path, os.Getenv)
+
+		if err != nil {
+			continue
+		}
+
+		path = filepath.Join(exp, opts.Prefix, name)
 
 		info, err := opts.fs.Stat(path)
 
