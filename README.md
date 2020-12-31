@@ -1,5 +1,7 @@
 # go-confusion
 
+[![godoc](https://godocs.io/github.com/njkleiner/go-confusion?status.svg)](https://godocs.io/github.com/njkleiner/go-confusion)
+
 Simple configuration management for Go projects. Inspired by [cristalhq/aconfig](https://github.com/cristalhq/aconfig).
 
 ## Install
