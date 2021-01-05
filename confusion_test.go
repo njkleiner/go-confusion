@@ -83,11 +83,30 @@ func TestLoadConfigErrLoaderNotFound(t *testing.T) {
 	}
 }
 
-// TestLoadConfigErrConfigNotFound exists mainly for coverage reasons.
-func TestLoadConfigErrConfigNotFound(t *testing.T) {
+// TestLoadConfigErrConfigNotFound_MissingFile exists mainly for
+// coverage reasons.
+func TestLoadConfigErrConfigNotFound_MissingFile(t *testing.T) {
 	opts := makeOptions()
 
 	opts.fs.MkdirAll("/etc/confusion", os.ModePerm)
+
+	type config struct {
+		Message string
+	}
+
+	c := config{}
+
+	err := LoadConfig("config.toml", opts, &c)
+
+	if err != ErrConfigNotFound {
+		t.Errorf("unexpected error; expected ErrConfigNotFound, actual %v", err)
+	}
+}
+
+// TestLoadConfigErrConfigNotFound_EmptyOptions exists mainly for
+// coverage reasons.
+func TestLoadConfigErrConfigNotFound_EmptyOptions(t *testing.T) {
+	opts := Options{}
 
 	type config struct {
 		Message string
