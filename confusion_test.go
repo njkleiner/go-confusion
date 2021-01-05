@@ -39,6 +39,7 @@ func TestLoadConfig(t *testing.T) {
 func TestLoadConfigPaths(t *testing.T) {
 	opts := makeOptions()
 
+	os.Setenv("XDG_CONFIG_HOME", "")
 	os.Setenv("HOME", "/home/test")
 
 	opts.fs.MkdirAll("/home/test/.config/confusion", os.ModePerm)
