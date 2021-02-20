@@ -139,10 +139,9 @@ func makeOptions() Options {
 	loaders[".toml"] = toml.Loader
 
 	return Options{
-		Prefix:      "confusion",
-		UserPaths:   []string{"$XDG_CONFIG_HOME", "$HOME/.config"},
-		SystemPaths: []string{"/etc"},
-		Loaders:     loaders,
-		fs:          afero.NewMemMapFs(),
+		Prefix:  "confusion",
+		Paths:   []string{"/etc", "$XDG_CONFIG_HOME", "$HOME/.config"},
+		Loaders: loaders,
+		fs:      afero.NewMemMapFs(),
 	}
 }

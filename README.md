@@ -14,41 +14,39 @@ Simple configuration management for Go projects. Inspired by [cristalhq/aconfig]
 package example
 
 import (
-    "fmt"
+	"fmt"
 
-    "github.com/njkleiner/go-confusion"
-    "github.com/njkleiner/go-confusion/toml"
+	"github.com/njkleiner/go-confusion"
+	"github.com/njkleiner/go-confusion/toml"
 )
 
 type ExampleConfig struct {
-    Foo, Bar string
+	Foo, Bar string
 }
 
 func Example() {
-    opts := confusion.Options{
-        Prefix: "example",
-        UserPaths: []string{
-            "$XDG_CONFIG_HOME",
-            "$HOME/.config",
-        },
-        SystemPaths: []string{
-            "/etc",
-        },
-        Loaders: map[string]confusion.Loader{
-            ".toml": toml.Loader,
-        },
-    }
+	opts := confusion.Options{
+		Prefix: "example",
+		Paths: []string{
+			"/etc",
+			"$XDG_CONFIG_HOME",
+			"$HOME/.config",
+		},
+		Loaders: map[string]confusion.Loader{
+			".toml": toml.Loader,
+		},
+	}
 
-    config := ExampleConfig{}
+	config := ExampleConfig{}
 
-    // Loads the config file located at "$HOME/.config/example/config.toml"
-    err := confusion.LoadConfig("config.toml", opts, &config)
+	// Loads the config file located at "$HOME/.config/example/config.toml"
+	err := confusion.LoadConfig("config.toml", opts, &config)
 
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 
-    fmt.Printf("loaded: %#v", config)
+	fmt.Printf("loaded: %#v", config)
 }
 ```
 

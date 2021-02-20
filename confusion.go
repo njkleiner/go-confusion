@@ -25,14 +25,12 @@ var (
 // Options determines where LoadConfig will look for configuration files
 // and what formats can be loaded.
 //
-// LoadConfig will first consider the UserPaths before falling back to
-// SystemPaths. Loaders maps file extensions (e.g., ".json") to a Loader
+// Loaders maps file extensions (e.g., ".json") to a Loader
 // that is capable of loading configuration files with this extension.
 type Options struct {
-	Prefix      string
-	UserPaths   []string
-	SystemPaths []string
-	Loaders     map[string]Loader
+	Prefix  string
+	Paths   []string
+	Loaders map[string]Loader
 
 	fs afero.Fs
 }
@@ -51,7 +49,7 @@ func LoadConfig(name string, opts Options, config interface{}) error {
 		opts.fs = afero.NewOsFs()
 	}
 
-	for _, path := range append(opts.UserPaths, opts.SystemPaths...) {
+	for _, path := range opts.Paths {
 		exp, err := expandstrict.Expand(path, os.Getenv)
 
 		if err != nil {
