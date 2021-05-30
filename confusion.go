@@ -44,7 +44,7 @@ type Loader interface {
 
 // LoadConfig attempts to load a configuration file with a certain name
 // according to the given Options and store the result in config.
-func LoadConfig(name string, opts Options, config interface{}) error {
+func LoadConfig(name string, opts Options, config interface{}) (string, error) {
 	if opts.fs == nil {
 		opts.fs = afero.NewOsFs()
 	}
@@ -68,7 +68,7 @@ func LoadConfig(name string, opts Options, config interface{}) error {
 		loader, ok := opts.Loaders[ext]
 
 		if !ok {
-			return ErrLoaderNotFound
+			return "", ErrLoaderNotFound
 		}
 
 		file, err := opts.fs.Open(path)
@@ -82,9 +82,9 @@ func LoadConfig(name string, opts Options, config interface{}) error {
 		file.Close()
 
 		if err == nil {
-			return nil
+			return path, nil
 		}
 	}
 
-	return ErrConfigNotFound
+	return "", ErrConfigNotFound
 }

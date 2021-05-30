@@ -40,13 +40,13 @@ func Example() {
 	config := ExampleConfig{}
 
 	// Loads the config file located at "$HOME/.config/example/config.toml"
-	err := confusion.LoadConfig("config.toml", opts, &config)
+	path, err := confusion.LoadConfig("config.toml", opts, &config)
 
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Printf("loaded: %#v", config)
+	fmt.Printf("loaded from %s: %#v", path, config)
 }
 ```
 

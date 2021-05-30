@@ -23,10 +23,14 @@ func TestLoadConfig(t *testing.T) {
 
 	c := config{}
 
-	err := LoadConfig("config.toml", opts, &c)
+	from, err := LoadConfig("config.toml", opts, &c)
 
 	if err != nil {
 		t.Error(err)
+	}
+
+	if from != "/etc/confusion/config.toml" {
+		t.Errorf("invalid file location: expected from = /etc/confusion/config.toml, actual from = %s", from)
 	}
 
 	if c.Message != "Hello World" {
@@ -51,10 +55,14 @@ func TestLoadConfigPaths(t *testing.T) {
 
 	c := config{}
 
-	err := LoadConfig("config.toml", opts, &c)
+	from, err := LoadConfig("config.toml", opts, &c)
 
 	if err != nil {
 		t.Error(err)
+	}
+
+	if from != "/home/test/.config/confusion/config.toml" {
+		t.Errorf("invalid file location: expected from = /home/test/.config/confusion/config.toml, actual from = %s", from)
 	}
 
 	if c.Message != "Hello World" {
@@ -76,7 +84,7 @@ func TestLoadConfigErrLoaderNotFound(t *testing.T) {
 
 	c := config{}
 
-	err := LoadConfig("config.toml", opts, &c)
+	_, err := LoadConfig("config.toml", opts, &c)
 
 	if err != ErrLoaderNotFound {
 		t.Errorf("unexpected error; expected ErrLoaderNotFound, actual %v", err)
@@ -96,7 +104,7 @@ func TestLoadConfigErrConfigNotFound_MissingFile(t *testing.T) {
 
 	c := config{}
 
-	err := LoadConfig("config.toml", opts, &c)
+	_, err := LoadConfig("config.toml", opts, &c)
 
 	if err != ErrConfigNotFound {
 		t.Errorf("unexpected error; expected ErrConfigNotFound, actual %v", err)
@@ -114,7 +122,7 @@ func TestLoadConfigErrConfigNotFound_EmptyOptions(t *testing.T) {
 
 	c := config{}
 
-	err := LoadConfig("config.toml", opts, &c)
+	_, err := LoadConfig("config.toml", opts, &c)
 
 	if err != ErrConfigNotFound {
 		t.Errorf("unexpected error; expected ErrConfigNotFound, actual %v", err)
