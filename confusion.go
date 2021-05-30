@@ -77,9 +77,9 @@ func LoadConfig(name string, opts Options, config interface{}) error {
 			continue
 		}
 
-		defer file.Close()
-
 		err = loader.Load(file, config)
+
+		file.Close()
 
 		if err == nil {
 			return nil
