@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -e
-
-cd "$(dirname "$0")/.."
-
-script/bootstrap
-
-go test -coverprofile=cover.out ./...
